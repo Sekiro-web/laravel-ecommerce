@@ -16,7 +16,11 @@ Route::controller(FirstController::class)->group(function () {
 
 Route::controller(AboutController::class)->group(function () {
     Route::get('/about', 'AboutPage')->name('about');
-    Route::post('/storefeedback', 'StoreFeedback')->name('storeFeedback');
+    Route::post('/storefeedback', 'StoreFeedback')->name('StoreFeedback');
+    Route::get('/feedback/{status?}', 'ReviewFeedback')->name('ReviewFeedback')->middleware(['auth', 'privilage:adminOrOwner']);
+    Route::post('/ApproveFeedback/{id}', 'ApproveFeedback')->name('ApproveFeedback')->middleware(['auth', 'privilage:adminOrOwner']);
+    Route::post('/RejectFeedback', 'RejectFeedback')->name('RejectFeedback')->middleware(['auth', 'privilage:adminOrOwner']);
+    Route::get('/DeleteFeedback/{id}', 'DeleteFeedback')->name('DeleteFeedback')->middleware(['auth', 'privilage:owner']);
 });
 
 Route::controller(ProductController::class)->group(function () {

@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(productsSeeder::class);
 
-        Feedback::factory(10)->create();
+        $this->call(HomeSliderSeeder::class);
+
+        $this->call(FeedbackSeeder::class);
     }
 }

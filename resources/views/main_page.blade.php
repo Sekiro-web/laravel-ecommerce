@@ -1,4 +1,30 @@
 <x-layout>
+    @push('custom-css')
+        <style>
+            .single-product-item {
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                transition: all 0.2s ease-in-out;
+            }
+
+            .single-product-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .product-image img {
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+            .single-product-item h3 {
+                font-size: 1.2rem;
+                margin-top: 15px;
+                font-weight: 600;
+            }
+        </style>
+    @endpush
     <x-slot:title>Products</x-slot:title>
     <x-header></x-header>
     <!-- home page slider -->
@@ -115,60 +141,36 @@
             </div>
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 text-center">
-                    <div class="testimonial-sliders">
-                        @foreach ($Feedback as $item)
-                            <div class="single-testimonial-slider">
-                                <div class="client-avater">
-                                    <img src="{{ asset('assets/img/avaters/avatar1.png') }}" alt="404">
-                                </div>
-                                <div class="client-meta">
-                                    {{-- name --}}
-                                    <h3>{{ $item->name }}</h3>
-                                    {{-- Subject --}}
-                                    <p>{{ $item->subject }}</p>
-                                    {{-- message --}}
-                                    <p class="testimonial-body">{{ $item->message }}</p>
-                                    <div class="last-icon">
-                                        <i class="fas fa-quote-right"></i>
+                    @if ($Feedback->isNotEmpty())
+                        <div class="{{ $Feedback->count() > 1 ? 'testimonial-sliders' : '' }}">
+                            @foreach ($Feedback as $item)
+                                <div class="single-testimonial-slider">
+                                    <div class="client-avater">
+                                        <img src="{{ asset('assets/img/avaters/avatar1.png') }}" alt="404">
+                                    </div>
+                                    <div class="client-meta">
+                                        {{-- name --}}
+                                        <h3>{{ $item->name }}</h3>
+                                        {{-- Subject --}}
+                                        <p>{{ $item->subject }}</p>
+                                        {{-- message --}}
+                                        <p class="testimonial-body">{{ $item->message }}</p>
+                                        <div class="last-icon">
+                                            <i class="fas fa-quote-right"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div>
+                            <h3>Be The First To <a href="{{ route('about') }}">Submit</a></h3>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
     <!-- end testimonail-section -->
     <x-logo_carousel></x-logo_carousel>
-    <style>
-        .single-product-item {
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease-in-out;
-        }
-
-        .single-product-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-image img {
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .single-product-item h3 {
-            font-size: 1.2rem;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-    </style>
 </x-layout>
-
-
-
-
-
-

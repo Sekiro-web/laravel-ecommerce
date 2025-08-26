@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\FeedbackStatus;
+use App\Models\FeedbackCause;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +20,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('subject');
             $table->text('message');
+            $table->foreignIdFor(FeedbackStatus::class)->nullable();
+            $table->foreignIdFor(FeedbackCause::class)->nullable();
+            $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
         });
     }

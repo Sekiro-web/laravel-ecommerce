@@ -152,29 +152,38 @@
             </div>
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 text-center">
-                    <div class="testimonial-sliders">
-                        @foreach ($Feedback as $item)
-                            <div class="single-testimonial-slider">
-                                <div class="client-avater">
-                                    <img src="{{ asset('assets/img/avaters/avatar1.png') }}" alt="404">
-                                </div>
-                                <div class="client-meta">
-                                    {{-- name --}}
-                                    <h3>{{ $item->name }}</h3>
-                                    {{-- Subject --}}
-                                    <p>{{ $item->subject }}</p>
-                                    {{-- message --}}
-                                    <p class="testimonial-body">{{ $item->message }}</p>
-                                    <div class="last-icon">
-                                        <i class="fas fa-quote-right"></i>
+                    @if ($Feedback->isNotEmpty())
+                        <div class="testimonial-sliders">
+                            @foreach ($Feedback as $item)
+                                <div class="single-testimonial-slider">
+                                    <div class="client-avater">
+                                        <img src="{{ asset('assets/img/avaters/avatar1.png') }}" alt="404">
+                                    </div>
+                                    <div class="client-meta">
+                                        {{-- name --}}
+                                        <h3>{{ $item->name }}</h3>
+                                        {{-- Subject --}}
+                                        <p>{{ $item->subject }}</p>
+                                        {{-- message --}}
+                                        <p class="testimonial-body">{{ $item->message }}</p>
+                                        <div class="last-icon">
+                                            <i class="fas fa-quote-right"></i>
+                                        </div>
                                     </div>
                                 </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div>
+                            <div>
+                                <h3>Be The First To Submit</h3>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- end testimonail-section -->
     <!-- feedback form -->
@@ -195,7 +204,7 @@
                     </div>
                     <div id="form_status"></div>
                     <div class="contact-form">
-                        <form method="POST" action="/storefeedback" id="fruitkha-contact">
+                        <form method="POST" action="{{ route('StoreFeedback') }}" id="fruitkha-contact">
                             @csrf
                             {{-- name & email --}}
                             <p class="d-flex">

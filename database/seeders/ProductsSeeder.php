@@ -14,7 +14,7 @@ class ProductsSeeder extends Seeder
      */
     public function run(): void
     {
-        $names = ['Mobiles', 'Laptops', 'Monitors', 'Cameras'];
+        $names = ['Mobile', 'Laptop', 'Monitor', 'Camera'];
         $cat_id = [1, 2, 3, 4];
         foreach (array_map(null, $names, $cat_id) as [$name, $id]) {
             for ($i = 1; $i <= 10; $i++) {
@@ -28,7 +28,7 @@ class ProductsSeeder extends Seeder
                 
                 for ($img = 1; $img <= 3; $img++) {
                     ProductsImages::create([
-                        'name'       => 'assets/img/' . $name . '.png',
+                        'name'       => 'assets/img/' . $name . '.jpg',
                         'products_id' => $product->id
                     ]);
                 }

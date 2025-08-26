@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
         foreach ($names as $name) {
             Category::factory()->create([
                 'name' => $name,
-                'imgpath' => 'assets/img/' . $name . 's.png'
+                'imgpath' => 'assets/img/' . $name . '.jpg'
             ]);
         }
     }

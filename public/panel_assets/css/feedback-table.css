@@ -1,0 +1,231 @@
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Responsive container widths - Simple 75% for big screens, 100% for small */
+@media (min-width: 768px) {
+    .table-container {
+        width: 75%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .table-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+
+/* DataTable wrapper improvements */
+.dataTables_wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+}
+
+/* Table styling */
+.responsive-table {
+    table-layout: fixed;
+    /* Better control over column widths */
+    word-wrap: break-word;
+    width: 100% !important;
+}
+
+/* Column width definitions */
+.responsive-table th:nth-child(1),
+.responsive-table td:nth-child(1) {
+    width: 80px;
+    min-width: 60px;
+    max-width: 80px;
+}
+
+.responsive-table th:nth-child(2),
+.responsive-table td:nth-child(2) {
+    width: 120px;
+    min-width: 100px;
+}
+
+.responsive-table th:nth-child(3),
+.responsive-table td:nth-child(3) {
+    width: auto;
+    /* Message column - flexible */
+    min-width: 150px;
+}
+
+.responsive-table th:nth-child(4),
+.responsive-table td:nth-child(4) {
+    width: 100px;
+    min-width: 80px;
+}
+
+.responsive-table th:nth-child(5),
+.responsive-table td:nth-child(5) {
+    width: 140px;
+    min-width: 120px;
+}
+
+/* Message cell styling - unified across all pages */
+.message-cell {
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+}
+
+.message-preview {
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    display: block;
+    line-height: 1.3;
+}
+
+.message-preview:hover {
+    background-color: #f8f9fa;
+}
+
+.message-truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tooltip-text {
+    display: block;
+    font-size: 0.7em;
+    color: #6c757d;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .responsive-table {
+        font-size: 0.85rem;
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+        padding: 0.5rem 0.25rem;
+    }
+
+    .message-cell {
+        max-width: 120px;
+    }
+
+    .message-preview {
+        padding: 4px 6px;
+        font-size: 0.8rem;
+    }
+
+    /* Action buttons on mobile */
+    .action-buttons .btn {
+        margin: 1px;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Stack buttons vertically on very small screens */
+    .btn-group-vertical .btn {
+        margin-bottom: 2px;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* DataTable controls responsive styling */
+.dataTables_length,
+.dataTables_filter {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+
+    .dataTables_length,
+    .dataTables_filter {
+        text-align: center;
+    }
+
+    .dataTables_length select {
+        width: auto;
+        display: inline-block;
+    }
+
+    .dataTables_filter input {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Pagination responsive */
+@media (max-width: 576px) {
+    .dataTables_paginate {
+        text-align: center;
+    }
+
+    .dataTables_paginate .paginate_button {
+        padding: 0.25rem 0.5rem;
+        margin: 0 1px;
+    }
+}
+
+/* Action buttons container */
+.action-buttons {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .action-buttons {
+        white-space: normal;
+    }
+}
+
+/* Status badges responsive */
+.status-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .status-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
+
+/* Fix for DataTables column width issues */
+.dataTables_scrollBody {
+    overflow-x: auto !important;
+}
+
+/* Ensure table doesn't overflow container */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Custom scrollbar for better UX */
+.dataTables_wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.dataTables_wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.dataTables_wrapper::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.dataTables_wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

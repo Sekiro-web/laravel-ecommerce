@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <!-- responsive -->
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-
+    @stack('custom-css')
 </head>
 
 <body>

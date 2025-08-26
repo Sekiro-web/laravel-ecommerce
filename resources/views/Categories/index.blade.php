@@ -30,7 +30,6 @@
                                     'alt' => $item->name,
                                 ];
                             @endphp
-
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#ImagesModal" data-name="{{ $item->name }}"
                                 data-images='@json($imageData)'>Show
@@ -41,11 +40,13 @@
                         {{-- actions --}}
                         <td>
                             @if (auth()->user()->isOwner())
-                                <a href="{{ route('editCategory', $item->id) }}">
-                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                </a>
-                                <button class="btn btn-sm btn-danger"
-                                    onclick="showDeleteDialog({{ $item->id }})">Delete</button>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('editCategory', $item->id) }}">
+                                        Edit
+                                    </a>
+                                    <button class="btn btn-sm btn-danger"
+                                        onclick="showDeleteDialog({{ $item->id }})">Delete</button>
+                                </div>
                             @else
                                 No action allowed
                             @endif
@@ -99,6 +100,8 @@
         </dialog>
         {{-- End Delete dialog --}}
     </div>
+
+
     @if (auth()->user()->isOwner())
         <div class="row mt-5">
             <div class="col-12 text-center">
@@ -121,6 +124,14 @@
             const dialogAction = document.querySelector('#delete-link');
             const deleteRouteTemplate = "{{ route('deleteCategory', ':id') }}";
 
+            function showDeleteDialog(itemId) {
+                dialogAction.href = deleteRouteTemplate.replace(':id', itemId);
+                dialog.showModal();
+            }
+
+            function closeDialog() {
+                dialog.close();
+            }
 
             $(document).ready(function() {
 
@@ -155,17 +166,7 @@
                 });
 
             });
-
-
-
-            function showDeleteDialog(itemId) {
-                dialogAction.href = deleteRouteTemplate.replace(':id', itemId);
-                dialog.showModal();
-            }
-
-            function closeDialog() {
-                dialog.close();
-            }
         </script>
+        <script src="{{ asset('panel_assets/js/custom/category-index.js') }}"></script>
     @endpush
 </x-dash_layout>
