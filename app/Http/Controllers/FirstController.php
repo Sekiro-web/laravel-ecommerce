@@ -12,7 +12,7 @@ class FirstController extends Controller
     public function MainPage()
     {
         $categories = category::all();
-        $Feedback = Feedback::whereRelation('FeedbackStatus', 'status', 'Approaved')->get();
+        $Feedback = Feedback::whereRelation('FeedbackStatus', 'status', 'Approaved')->orderBy('created_at', 'desc')->take(3)->get();
         $SliderImages = HomeSlider::all();
         return view('main_page', [
             'categories' => $categories,

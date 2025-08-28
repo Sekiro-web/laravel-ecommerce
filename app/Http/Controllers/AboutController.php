@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Rules\Badwords;
 use App\Models\Feedback;
 use App\Models\FeedbackCause;
 use App\Models\FeedbackStatus;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class AboutController extends Controller
 {
     public function AboutPage()
     {
-        $Feedback = Feedback::whereNotNull('approval')
-            ->where('approval', 'Yes')
-            ->get();
+        $Feedback = Feedback::whereRelation('FeedbackStatus', 'status', 'Approaved')->orderBy('created_at', 'desc')->get();
         return view('About.index', [
             'Feedback' => $Feedback
         ]);
@@ -23,12 +22,22 @@ class AboutController extends Controller
 
     public function StoreFeedback(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'min:3', 'max:30'],
-            'email' => ['required', 'email', 'ends_with:.com'],
-            'subject' => ['required', 'min:3', 'max:30'],
-            'message' => ['required', new Badwords]
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'min:3', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
+            'email' => ['email', 'ends_with:.com'],
+            'subject' => ['min:3', 'max:30'],
+            'message' => ['required', 'blasp_check']
+        ],[
+            'message.blasp_check' => 'Your feedback contains inappropriate or offensive words. Please rephrase it.'
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->withFragment('feedback-form');
+        }
+
         $Feedback = new Feedback();
         $Feedback->name = $request->name;
         $Feedback->email = $request->email;
@@ -36,7 +45,7 @@ class AboutController extends Controller
         $Feedback->message = $request->message;
 
         $Feedback->save();
-        return redirect('/about');
+        return back()->withFragment('feedback-form');
     }
 
     public function ReviewFeedback($status = null)

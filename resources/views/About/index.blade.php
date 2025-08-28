@@ -203,7 +203,7 @@
                         <p>We are more than happy to receive your feedback</p>
                     </div>
                     <div id="form_status"></div>
-                    <div class="contact-form">
+                    <div id="feedback-form" class="contact-form">
                         <form method="POST" action="{{ route('StoreFeedback') }}" id="fruitkha-contact">
                             @csrf
                             {{-- name & email --}}
